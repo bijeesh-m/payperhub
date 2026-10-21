@@ -34,6 +34,15 @@
   text-decoration: none;
 }
 
+.productImage {
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.card:hover .productImage {
+  transform: scale(1.05);
+}
+
 .imagePlaceholder {
   width: 100%;
   height: 100%;

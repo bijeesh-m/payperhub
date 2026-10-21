@@ -2,6 +2,7 @@
 
 import React from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { BarChart2, Trash2, ShoppingCart, ArrowRight, Zap, Star } from 'lucide-react';
 import { useCompareStore } from '@/store/compareStore';
 import { useCartStore } from '@/store/cartStore';
@@ -101,8 +102,18 @@ export default function CompareClientPage() {
                           <Trash2 size={16} />
                         </button>
                       </div>
-                      <div style={{ height: '120px', background: 'var(--color-slate-100)', borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem' }}>
-                        <Zap size={36} color="#0ea5e9" />
+                      <div style={{ position: 'relative', height: '120px', background: 'var(--color-slate-100)', borderRadius: 'var(--radius-lg)', display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '1rem', overflow: 'hidden' }}>
+                        {item.images?.[0]?.url ? (
+                          <Image
+                            src={item.images[0].url}
+                            alt={item.name}
+                            fill
+                            sizes="240px"
+                            style={{ objectFit: 'cover' }}
+                          />
+                        ) : (
+                          <Zap size={36} color="#0ea5e9" />
+                        )}
                       </div>
                       <div style={{ fontSize: '0.75rem', color: 'var(--color-primary)', fontWeight: 700, textTransform: 'uppercase' }}>
                         {item.brand}

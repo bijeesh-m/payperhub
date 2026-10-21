@@ -70,6 +70,15 @@
   box-shadow: var(--shadow-sm);
 }
 
+.mainImage {
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.mainImageWrapper:hover .mainImage {
+  transform: scale(1.03);
+}
+
 .mainPlaceholderIcon {
   color: var(--color-primary);
   opacity: 0.85;
@@ -95,6 +104,7 @@
 }
 
 .thumbItem {
+  position: relative;
   width: 72px;
   height: 72px;
   border-radius: var(--radius-lg);
@@ -106,6 +116,12 @@
   cursor: pointer;
   transition: all var(--transition-fast);
   flex-shrink: 0;
+  overflow: hidden;
+  padding: 0;
+}
+
+.thumbImage {
+  object-fit: cover;
 }
 
 .thumbItemActive, .thumbItem:hover {

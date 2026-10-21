@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { 
   Heart, ShoppingCart, BarChart2, Star, Check, 
   Truck, ShieldCheck, RotateCcw, Headphones, 
@@ -22,6 +23,7 @@ interface ProductDetailClientProps {
 
 export default function ProductDetailClient({ product, relatedProducts }: ProductDetailClientProps) {
   const [quantity, setQuantity] = useState(1);
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0);
   const [activeTab, setActiveTab] = useState<'specs' | 'desc' | 'shipping' | 'reviews'>('specs');
   const [justAdded, setJustAdded] = useState(false);
 
@@ -49,6 +51,8 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
     ? Math.round(((product.compareAtPrice - product.price) / product.compareAtPrice) * 100)
     : product.discount;
 
+  const currentImage = product.images?.[selectedImageIndex] || product.images?.[0];
+
   return (
     <div className={styles.page}>
       <div className="container">
@@ -74,21 +78,41 @@ export default function ProductDetailClient({ product, relatedProducts }: Produc
                 {discount && discount > 0 && <span className="badge badge-error">-{discount}% OFF</span>}
               </div>
 
-              <Zap size={96} className={styles.mainPlaceholderIcon} />
+              {currentImage?.url ? (
+                <Image
+                  src={currentImage.url}
+                  alt={currentImage.alt || product.name}
+                  fill
+                  priority
+                  sizes="(max-width: 992px) 100vw, 50vw"
+                  className={styles.mainImage}
+                />
+              ) : (
+                <Zap size={96} className={styles.mainPlaceholderIcon} />
+              )}
             </div>
 
             {/* Thumbnail selector */}
-            <div className={styles.thumbList}>
-              <button className={`${styles.thumbItem} ${styles.thumbItemActive}`} aria-label="Main angle">
-                <Zap size={24} color="#0ea5e9" />
-              </button>
-              <button className={styles.thumbItem} aria-label="Side angle">
-                <Zap size={24} color="#64748b" />
-              </button>
-              <button className={styles.thumbItem} aria-label="Connector detail">
-                <Zap size={24} color="#64748b" />
-              </button>
-            </div>
+            {product.images && product.images.length > 1 && (
+              <div className={styles.thumbList}>
+                {product.images.map((img, idx) => (
+                  <button
+                    key={img.id || idx}
+                    className={`${styles.thumbItem} ${selectedImageIndex === idx ? styles.thumbItemActive : ''}`}
+                    onClick={() => setSelectedImageIndex(idx)}
+                    aria-label={img.alt || `Product image ${idx + 1}`}
+                  >
+                    <Image
+                      src={img.url}
+                      alt={img.alt || product.name}
+                      fill
+                      sizes="72px"
+                      className={styles.thumbImage}
+                    />
+                  </button>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Info Column */}

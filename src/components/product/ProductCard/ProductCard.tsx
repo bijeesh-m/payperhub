@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { Heart, ShoppingCart, BarChart2, Star, Check, Zap, AlertCircle } from 'lucide-react';
 import { Product } from '@/types/product';
 import { useCartStore } from '@/store/cartStore';
@@ -60,11 +61,21 @@ export default function ProductCard({ product, layout = 'grid' }: ProductCardPro
   return (
     <article className={`${styles.card} ${layout === 'list' ? styles.listCard : ''}`}>
       <Link href={`/products/${product.slug}`} className={styles.imageWrapper}>
-        {/* Product Image Placeholder */}
-        <div className={styles.imagePlaceholder} aria-label={product.images[0]?.alt}>
-          <Zap size={40} className={styles.placeholderIcon} />
-          <span className={styles.placeholderCategory}>{product.subcategory}</span>
-        </div>
+        {/* Product Image */}
+        {product.images && product.images[0]?.url ? (
+          <Image
+            src={product.images[0].url}
+            alt={product.images[0].alt || product.name}
+            fill
+            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 320px"
+            className={styles.productImage}
+          />
+        ) : (
+          <div className={styles.imagePlaceholder} aria-label={product.images?.[0]?.alt}>
+            <Zap size={40} className={styles.placeholderIcon} />
+            <span className={styles.placeholderCategory}>{product.subcategory}</span>
+          </div>
+        )}
 
         {/* Badges */}
         <div className={styles.badges}>

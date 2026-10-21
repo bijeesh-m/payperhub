@@ -2,6 +2,7 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { ShoppingBag, ArrowRight, Trash2, ShieldCheck, Truck, Zap, CheckCircle2 } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { formatPrice } from '@/lib/utils';
@@ -101,7 +102,16 @@ export default function CartClientPage() {
               {items.map((item) => (
                 <div key={item.product.id} className={styles.cartItem}>
                   <div className={styles.itemImage}>
-                    <Zap size={28} />
+                    {item.product.images?.[0]?.url ? (
+                      <Image
+                        src={item.product.images[0].url}
+                        alt={item.product.name}
+                        fill
+                        sizes="80px"
+                      />
+                    ) : (
+                      <Zap size={28} />
+                    )}
                   </div>
 
                   <div className={styles.itemInfo}>

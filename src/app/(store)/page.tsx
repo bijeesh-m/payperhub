@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import Link from 'next/link';
+import Image from 'next/image';
 import {
   Zap, Battery, Shield, Star, ArrowRight,
   Truck, RotateCcw, Headphones, Award, TrendingUp,
@@ -223,7 +224,13 @@ export default function HomePage() {
                 </Link>
               </div>
               <div className={styles.promoVisual}>
-                <Battery size={80} className={styles.promoIcon} />
+                <Image
+                  src="/images/products/samsung-battery-1.jpg"
+                  alt="Samsung 48V Battery Pack"
+                  width={200}
+                  height={150}
+                  className={styles.promoVisualImg}
+                />
               </div>
             </div>
 
@@ -239,6 +246,15 @@ export default function HomePage() {
                     Shop <ArrowRight size={14} />
                   </Link>
                 </div>
+                <div className={styles.promoVisualSmall}>
+                  <Image
+                    src="/images/products/shimano-brake-1.jpg"
+                    alt="Shimano XT Brakes"
+                    width={90}
+                    height={90}
+                    className={styles.promoVisualImg}
+                  />
+                </div>
               </div>
 
               <div className={`${styles.promoCard} ${styles.promoCardSmall} ${styles.promoCardAccent}`}>
@@ -251,6 +267,15 @@ export default function HomePage() {
                   <Link href="/products/ebike-controller-sabvoton-96v-72v-50a" className="btn btn-outline-white">
                     Shop <ArrowRight size={14} />
                   </Link>
+                </div>
+                <div className={styles.promoVisualSmall}>
+                  <Image
+                    src="/images/products/sabvoton-controller-1.jpg"
+                    alt="Sabvoton Controller"
+                    width={90}
+                    height={90}
+                    className={styles.promoVisualImg}
+                  />
                 </div>
               </div>
             </div>

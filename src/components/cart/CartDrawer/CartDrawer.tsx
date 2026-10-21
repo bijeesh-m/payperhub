@@ -2,6 +2,7 @@
 
 import React, { useEffect } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { X, ShoppingCart, Trash2, Plus, Minus, ArrowRight, ShoppingBag, Zap } from 'lucide-react';
 import { useCartStore } from '@/store/cartStore';
 import { formatPrice } from '@/lib/utils';
@@ -78,11 +79,21 @@ export default function CartDrawer() {
             <div className={styles.itemsList}>
               {currentItems.map((item) => (
                 <div key={item.product.id} className={styles.cartItem}>
-                  {/* Image placeholder */}
+                  {/* Product Image */}
                   <div className={styles.itemImageWrapper}>
-                    <div className={styles.itemImagePlaceholder}>
-                      <Zap size={22} color="#0ea5e9" />
-                    </div>
+                    {item.product.images?.[0]?.url ? (
+                      <Image
+                        src={item.product.images[0].url}
+                        alt={item.product.name}
+                        fill
+                        sizes="72px"
+                        className={styles.itemImage}
+                      />
+                    ) : (
+                      <div className={styles.itemImagePlaceholder}>
+                        <Zap size={22} color="#0ea5e9" />
+                      </div>
+                    )}
                   </div>
 
                   <div className={styles.itemInfo}>
