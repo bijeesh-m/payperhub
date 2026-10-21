@@ -2,8 +2,8 @@ import type { Metadata } from 'next';
 import Link from 'next/link';
 import {
   Zap, Battery, Shield, Star, ArrowRight,
-  Truck, RotateCcw, Headphones, Award,
-  TrendingUp, Package, CheckCircle
+  Truck, RotateCcw, Headphones, Award, TrendingUp,
+  Bike, Scooter, Motorbike, Wrench
 } from 'lucide-react';
 import { products, categories } from '@/data/products';
 import ProductCard from '@/components/product/ProductCard';
@@ -13,21 +13,14 @@ import { formatPrice } from '@/lib/utils';
 import styles from './page.module.css';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Premium Electric Bike Parts & Accessories',
-  description: `Shop ${SITE_NAME} for the best electric bike parts — motors, batteries, brakes, displays & more. Expert support. Fast shipping. 30-day returns.`,
-  keywords: ['electric bike parts', 'e-bike motor', 'e-bike battery', 'ebike accessories', 'hub motor', 'mid drive motor'],
+  title: 'Premium Electric Vehicle & EV Parts',
+  description: `Shop ${SITE_NAME} for premier electric vehicle parts — high-performance motors, lithium battery packs, smart inverters, brakes & charging systems for all electric vehicles.`,
+  keywords: ['electric vehicle parts', 'EV parts', 'electric bike parts', 'e-bike motor', 'lithium battery pack', 'EV inverter', 'EV motor controller', 'regenerative braking'],
 });
 
 const featuredProducts = products.filter((p) => p.isFeatured).slice(0, 4);
 const bestSellers = products.filter((p) => p.isBestSeller).slice(0, 4);
 const newArrivals = products.filter((p) => p.isNew).slice(0, 3);
-
-const stats = [
-  { value: '10K+', label: 'Happy Builders' },
-  { value: '300+', label: 'Products' },
-  { value: '4.8 / 5', label: 'Avg. Rating' },
-  { value: '2-Day', label: 'Avg. Shipping' },
-];
 
 const trustFeatures = [
   { icon: <Truck size={22} />, title: 'Free Shipping', desc: 'On all orders over ₹1,999 across India.' },
@@ -43,70 +36,81 @@ export default function HomePage() {
     <>
       {/* ── HERO SECTION ─────────────────────────────────── */}
       <section className={styles.hero}>
-        <div className="container">
-          <div className={styles.heroContent}>
-            <div className={styles.heroText}>
-              <div className={styles.heroBadge}>
-                <Zap size={12} />
-                <span>The #1 E-Bike Parts Store</span>
-              </div>
-              <h1 className={styles.heroTitle}>
-                Build Your Dream
-                <br />
-                <span>Electric Bike.</span>
-              </h1>
-              <p className={styles.heroDesc}>
-                From motors to batteries, brakes to displays — everything you need to build,
-                upgrade, or repair your e-bike. 300+ premium parts in stock with expert support.
-              </p>
-              <div className={styles.heroActions}>
-                <Link href="/products" className="btn btn-primary btn-lg">
-                  Shop All Parts <ArrowRight size={18} />
-                </Link>
-                <Link href="/products?category=motors-controllers" className="btn btn-outline btn-lg">
-                  Browse Motors
-                </Link>
-              </div>
+        <div className={styles.heroBg} />
+        <div className={styles.heroOverlay} />
 
-              {/* Stats */}
-              <div className={styles.heroStats}>
-                {stats.map((stat) => (
-                  <div key={stat.label} className={styles.heroStat}>
-                    <span className={styles.heroStatValue}>{stat.value}</span>
-                    <span className={styles.heroStatLabel}>{stat.label}</span>
-                  </div>
-                ))}
+        <div className="container" style={{ position: 'relative', zIndex: 2 }}>
+          <div className={styles.heroCentered}>
+            {/* Tag / Kicker */}
+            {/* <div className={styles.heroKicker}>
+              <span className={styles.kickerDot} />
+              <span>Certified EV Powertrain &amp; Component Hub</span>
+            </div> */}
+
+            {/* Main Headline */}
+            <h1 className={styles.heroTitle}>
+              Power Every <span className={styles.titleGradient}>Electric Vehicle.</span>
+            </h1>
+
+            {/* Description */}
+            <p className={styles.heroDesc}>
+              High-torque drive motors, high-density modular battery packs, smart FOC inverters, and precision braking systems.
+              Engineered OEM and performance hardware for e-bikes, scooters, motorcycles, and custom EV builds.
+            </p>
+
+            {/* Action Buttons */}
+            <div className={styles.heroActions}>
+              <Link href="/products" className="btn btn-primary btn-lg">
+                Explore Full Catalog <ArrowRight size={18} />
+              </Link>
+              <Link href="/products?category=motors-controllers" className={`${styles.heroSecondaryBtn} btn btn-lg`}>
+                Browse Motors &amp; Drives
+              </Link>
+            </div>
+
+            {/* Vehicle Category Quick-Jump Bar */}
+            <div className={styles.vehicleQuickNav}>
+              <span className={styles.quickNavLabel}>Browse by Vehicle:</span>
+              <div className={styles.quickNavChips}>
+                <Link href="/products?category=motors-controllers" className={styles.quickChip}>
+                  <Bike size={16} className={styles.quickChipIcon} />
+                  <span>Electric Bikes</span>
+                </Link>
+                <Link href="/products?category=batteries-charging" className={styles.quickChip}>
+                  <Scooter size={16} className={styles.quickChipIcon} />
+                  <span>Electric Scooters</span>
+                </Link>
+                <Link href="/products?category=motors-controllers" className={styles.quickChip}>
+                  <Motorbike size={16} className={styles.quickChipIcon} />
+                  <span>E-Motorcycles</span>
+                </Link>
+                <Link href="/products?category=displays-computers" className={styles.quickChip}>
+                  <Wrench size={15} className={styles.quickChipIcon} />
+                  <span>Custom EV Builds</span>
+                </Link>
               </div>
             </div>
 
-            {/* Hero Visual */}
-            <div className={styles.heroVisual}>
-              <div className={styles.heroCard}>
-                <div className={styles.heroCardInner}>
-                  <div className={styles.motorAnim}>
-                    <Zap size={80} className={styles.motorIcon} />
-                    <div className={styles.motorRing} />
-                    <div className={`${styles.motorRing} ${styles.motorRing2}`} />
-                  </div>
-                  <div className={styles.heroCardTitle}>Bafang M620 Ultra</div>
-                  <div className={styles.heroCardSub}>1000W Mid-Drive Motor</div>
-                  <div className={styles.heroCardPrice}>{formatPrice(549.99)}</div>
-                  <div className={styles.heroCardBadge}>
-                    <CheckCircle size={12} />
-                    <span>In Stock — Ships Today</span>
-                  </div>
-                </div>
+            {/* Specs / Proof Strip */}
+            <div className={styles.heroProofStrip}>
+              <div className={styles.proofItem}>
+                <span className={styles.proofValue}>10,000+</span>
+                <span className={styles.proofLabel}>EV Builders &amp; Fleets</span>
               </div>
-
-              {/* Floating badges */}
-              <div className={`${styles.floatBadge} ${styles.floatBadge1}`}>
-                <TrendingUp size={14} /> Best Seller
+              <div className={styles.proofDivider} />
+              <div className={styles.proofItem}>
+                <span className={styles.proofValue}>300+</span>
+                <span className={styles.proofLabel}>Tested Components</span>
               </div>
-              <div className={`${styles.floatBadge} ${styles.floatBadge2}`}>
-                <Package size={14} /> Free Shipping
+              <div className={styles.proofDivider} />
+              <div className={styles.proofItem}>
+                <span className={styles.proofValue}>4.8 / 5.0</span>
+                <span className={styles.proofLabel}>Customer Rating</span>
               </div>
-              <div className={`${styles.floatBadge} ${styles.floatBadge3}`}>
-                <Star size={14} fill="currentColor" /> 4.8 / 5.0
+              <div className={styles.proofDivider} />
+              <div className={styles.proofItem}>
+                <span className={styles.proofValue}>Pan-India</span>
+                <span className={styles.proofLabel}>Express 2-Day Shipping</span>
               </div>
             </div>
           </div>

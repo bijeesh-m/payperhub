@@ -1,43 +1,67 @@
+@import "tailwindcss";
+
+@theme {
+  --color-brand: #155EEF;
+  --color-brand-hover: #124BC4;
+
+  --color-heading: #171A21;
+  --color-body: #4B5563;
+
+  --color-background: #F3F5F9;
+  --color-surface: #FFFFFF;
+  --color-border: #E5E7EB;
+
+  --color-success: #15803D;
+}
+
 /* ============================================================
    PAYPERHUB — GLOBAL DESIGN SYSTEM
    Premium e-commerce design system with bold typography
    ============================================================ */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap');
-
 /* ── CSS VARIABLES ─────────────────────────────────────── */
 :root {
-  /* Brand Colors */
-  --color-primary: #0a0a0a;
-  --color-primary-hover: #1a1a1a;
-  --color-accent: #2563eb;
-  --color-accent-hover: #1d4ed8;
-  --color-accent-light: #eff6ff;
-  --color-electric: #00d4ff;
-  --color-electric-dim: #e0f7ff;
+  /* User Theme Tokens */
+  --color-brand: #155EEF;
+  --color-brand-hover: #124BC4;
+  --color-heading: #171A21;
+  --color-body: #4B5563;
+  --color-background: #F3F5F9;
+  --color-surface: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-success: #15803D;
+
+  /* Brand Colors & Aliases */
+  --color-primary: #171A21;
+  --color-primary-hover: #0F1218;
+  --color-accent: #155EEF;
+  --color-accent-hover: #124BC4;
+  --color-accent-light: #EFF4FF;
+  --color-electric: #155EEF;
+  --color-electric-dim: #EFF4FF;
 
   /* Neutrals */
-  --color-white: #ffffff;
-  --color-bg: #f8f9fa;
-  --color-bg-secondary: #f1f3f5;
-  --color-surface: #ffffff;
-  --color-surface-raised: #ffffff;
-  --color-border: #e5e7eb;
-  --color-border-strong: #d1d5db;
+  --color-white: #FFFFFF;
+  --color-bg: #F3F5F9;
+  --color-bg-secondary: #E8ECF2;
+  --color-surface: #FFFFFF;
+  --color-surface-raised: #FFFFFF;
+  --color-border: #E5E7EB;
+  --color-border-strong: #D1D5DB;
 
   /* Text */
-  --color-text-primary: #0a0a0a;
-  --color-text-secondary: #4b5563;
-  --color-text-muted: #9ca3af;
-  --color-text-inverse: #ffffff;
+  --color-text-primary: #171A21;
+  --color-text-secondary: #4B5563;
+  --color-text-muted: #6B7280;
+  --color-text-inverse: #FFFFFF;
 
   /* Status */
-  --color-success: #10b981;
-  --color-success-light: #d1fae5;
-  --color-warning: #f59e0b;
-  --color-warning-light: #fef3c7;
-  --color-error: #ef4444;
-  --color-error-light: #fee2e2;
+  --color-success: #15803D;
+  --color-success-light: #DCFCE7;
+  --color-warning: #D97706;
+  --color-warning-light: #FEF3C7;
+  --color-error: #EF4444;
+  --color-error-light: #FEE2E2;
 
   /* Typography */
   --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
@@ -95,7 +119,7 @@
   --shadow-lg: 0 10px 15px -3px rgba(0,0,0,0.08), 0 4px 6px -2px rgba(0,0,0,0.04);
   --shadow-xl: 0 20px 25px -5px rgba(0,0,0,0.08), 0 10px 10px -5px rgba(0,0,0,0.04);
   --shadow-2xl: 0 25px 50px -12px rgba(0,0,0,0.15);
-  --shadow-card-hover: 0 20px 40px -10px rgba(37,99,235,0.15);
+  --shadow-card-hover: 0 20px 40px -10px rgba(21, 94, 239, 0.15);
 
   /* Transitions */
   --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -128,6 +152,9 @@ html {
   scroll-behavior: smooth;
   -webkit-text-size-adjust: 100%;
   font-size: 16px;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
 }
 
 body {
@@ -139,6 +166,10 @@ body {
   background-color: var(--color-bg);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  overflow-x: hidden;
+  width: 100%;
+  max-width: 100%;
+  position: relative;
 }
 
 img, video {
@@ -195,6 +226,12 @@ h6 { font-size: var(--text-base); }
   max-width: var(--content-width);
   margin: 0 auto;
   padding: 0 var(--space-6);
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 var(--space-4);
+  }
 }
 
 .section {
@@ -299,7 +336,7 @@ h6 { font-size: var(--text-base); }
 .btn-accent:hover {
   background: var(--color-accent-hover);
   transform: translateY(-1px);
-  box-shadow: 0 8px 20px rgba(37,99,235,0.35);
+  box-shadow: 0 8px 20px rgba(21, 94, 239, 0.35);
 }
 
 .btn-outline {
@@ -417,7 +454,7 @@ h6 { font-size: var(--text-base); }
 
 .input:focus {
   border-color: var(--color-accent);
-  box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.1);
+  box-shadow: 0 0 0 3px rgba(21, 94, 239, 0.12);
 }
 
 .input::placeholder { color: var(--color-text-muted); }

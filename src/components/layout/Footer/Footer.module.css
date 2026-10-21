@@ -15,6 +15,7 @@
   align-items: center;
   justify-content: space-between;
   gap: var(--space-8);
+  flex-wrap: wrap;
 }
 
 .newsletterText h3 {
@@ -33,8 +34,8 @@
 .newsletterForm {
   display: flex;
   gap: var(--space-2);
-  flex-shrink: 0;
-  min-width: 420px;
+  width: 100%;
+  max-width: 440px;
 }
 
 .newsletterInputWrapper {
@@ -104,38 +105,23 @@
 
 /* Brand Column */
 .footerLogo {
-  display: flex;
+  display: inline-flex;
   align-items: center;
-  gap: var(--space-2);
   margin-bottom: var(--space-4);
   text-decoration: none;
+  transition: opacity var(--transition-fast);
 }
 
-.footerLogoIcon {
-  width: 36px;
-  height: 36px;
-  background: var(--color-accent);
-  border-radius: var(--radius-md);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--color-white);
+.footerLogo:hover {
+  opacity: 0.85;
 }
 
-.footerLogoMain {
-  font-family: var(--font-display);
-  font-weight: var(--font-black);
-  font-size: var(--text-lg);
-  color: var(--color-white);
-  letter-spacing: -0.03em;
-}
-
-.footerLogoSub {
-  font-size: 10px;
-  font-weight: var(--font-medium);
-  color: rgba(255, 255, 255, 0.5);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
+.footerLogoImg {
+  height: 34px;
+  width: auto;
+  max-width: 165px;
+  object-fit: contain;
+  display: block;
 }
 
 .brandDesc {
@@ -332,13 +318,20 @@
 
   .newsletterForm {
     width: 100%;
+    max-width: 100%;
     min-width: 0;
-    flex-wrap: wrap;
+    flex-direction: column;
+    gap: var(--space-2);
   }
 
   .newsletterForm .newsletterInputWrapper {
     width: 100%;
     flex: none;
+  }
+
+  .newsletterBtn {
+    width: 100%;
+    justify-content: center;
   }
 
   .grid {

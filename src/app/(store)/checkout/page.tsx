@@ -340,7 +340,7 @@ export default function CheckoutPage() {
                   className={`${styles.paymentTab} ${paymentMethod === 'cod' ? styles.paymentTabActive : ''}`}
                   onClick={() => setPaymentMethod('cod')}
                 >
-                  <Truck size={18} style={{ display: 'block', margin: '0 auto 4px', color: '#10b981' }} />
+                  <Truck size={18} style={{ display: 'block', margin: '0 auto 4px', color: 'var(--color-success)' }} />
                   Cash on Delivery
                 </button>
               </div>
@@ -466,7 +466,7 @@ export default function CheckoutPage() {
             </button>
 
             <div style={{ marginTop: '1.25rem', display: 'flex', alignItems: 'center', gap: '6px', justifyContent: 'center', fontSize: '0.75rem', color: 'var(--color-text-tertiary)' }}>
-              <ShieldCheck size={16} color="#10b981" />
+              <ShieldCheck size={16} color="var(--color-success)" />
               <span>256-bit Encrypted SSL Guarantee</span>
             </div>
           </div>

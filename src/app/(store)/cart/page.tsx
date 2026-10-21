@@ -80,7 +80,7 @@ export default function CartPage() {
             <Truck size={18} color="#0ea5e9" />
             {isFreeShipping ? (
               <span style={{ display: 'inline-flex', alignItems: 'center', gap: '6px' }}>
-                <CheckCircle2 size={16} color="#10b981" />
+                <CheckCircle2 size={16} color="var(--color-success)" />
                 <span>Great news! You have unlocked <strong>FREE Standard Shipping across India</strong>!</span>
               </span>
             ) : (
@@ -223,7 +223,7 @@ export default function CartPage() {
             </Link>
 
             <div style={{ marginTop: '1.5rem', display: 'flex', alignItems: 'center', gap: '8px', fontSize: '0.75rem', color: 'var(--color-text-tertiary)', justifyContent: 'center' }}>
-              <ShieldCheck size={16} color="#10b981" />
+              <ShieldCheck size={16} color="var(--color-success)" />
               <span>Guaranteed Safe & Secure Checkout</span>
             </div>
           </div>

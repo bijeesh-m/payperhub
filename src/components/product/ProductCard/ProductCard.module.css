@@ -283,3 +283,33 @@
   background: var(--color-warning-light);
   border-radius: var(--radius-sm);
 }
+
+/* Mobile Responsive */
+@media (max-width: 480px) {
+  .body {
+    padding: 10px;
+    gap: 4px;
+  }
+  .brand {
+    font-size: 10px;
+  }
+  .name {
+    font-size: 12px;
+    line-height: 1.35;
+    min-height: 32px;
+  }
+  .rating {
+    font-size: 11px;
+  }
+  .price {
+    font-size: 14px;
+  }
+  .comparePrice {
+    font-size: 10px;
+  }
+  .cartBtn {
+    padding: 5px 8px;
+    font-size: 11px;
+    gap: 3px;
+  }
+}

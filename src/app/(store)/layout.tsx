@@ -8,7 +8,7 @@ export default function StoreLayout({ children }: { children: ReactNode }) {
     <>
       <Navbar />
       <CartDrawer />
-      <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      <main style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column', width: '100%', maxWidth: '100%', overflowX: 'hidden' }}>
         {children}
       </main>
       <Footer />

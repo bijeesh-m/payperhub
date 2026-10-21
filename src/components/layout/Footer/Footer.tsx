@@ -2,7 +2,8 @@
 
 import React from 'react';
 import Link from 'next/link';
-import { Zap, Mail, Phone, MapPin, ArrowRight, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
+import Image from 'next/image';
+import { Mail, Phone, MapPin, ArrowRight, ShieldCheck, Truck, RotateCcw } from 'lucide-react';
 import styles from './Footer.module.css';
 
 const shopLinks = [
@@ -66,14 +67,14 @@ export default function Footer() {
           <div className={styles.grid}>
             {/* Brand Column */}
             <div className={styles.brandColumn}>
-              <Link href="/" className={styles.footerLogo}>
-                <div className={styles.footerLogoIcon}>
-                  <Zap size={20} />
-                </div>
-                <div>
-                  <div className={styles.footerLogoMain}>Payperhub</div>
-                  <div className={styles.footerLogoSub}>E-Bike Store</div>
-                </div>
+              <Link href="/" className={styles.footerLogo} aria-label="Payperhub Home">
+                <Image
+                  src="/logo-white.png"
+                  alt="Payperhub"
+                  width={160}
+                  height={36}
+                  className={styles.footerLogoImg}
+                />
               </Link>
               <p className={styles.brandDesc}>
                 India&apos;s trusted destination for premium electric bike components. From high-torque motors to long-range batteries,

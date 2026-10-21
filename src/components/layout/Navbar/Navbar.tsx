@@ -2,6 +2,7 @@
 
 import React, { useState, useEffect, useRef } from 'react';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useRouter, usePathname } from 'next/navigation';
 import {
   Search,
@@ -9,13 +10,15 @@ import {
   Heart,
   Menu,
   X,
-  Zap,
   ChevronDown,
   User,
   BarChart2,
   Phone,
   Truck,
   Headphones,
+  LayoutGrid,
+  ChevronRight,
+  ArrowRight,
 } from 'lucide-react';
 import CategoryIcon from '@/components/ui/CategoryIcon';
 import { useCartStore } from '@/store/cartStore';
@@ -29,6 +32,7 @@ export default function Navbar() {
   const pathname = usePathname();
   const [searchQuery, setSearchQuery] = useState('');
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isMobileSearchOpen, setIsMobileSearchOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isCategoryOpen, setIsCategoryOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
@@ -53,6 +57,7 @@ export default function Navbar() {
   useEffect(() => {
     setIsMobileMenuOpen(false);
     setIsCategoryOpen(false);
+    setIsMobileSearchOpen(false);
   }, [pathname]);
 
   useEffect(() => {
@@ -104,63 +109,85 @@ export default function Navbar() {
             {/* Left Group */}
             <div className={styles.navLeft}>
               {/* Logo */}
-              <Link href="/" className={styles.logo}>
-                <div className={styles.logoIcon}>
-                  <Zap size={20} />
-                </div>
-                <div className={styles.logoText}>
-                  <span className={styles.logoMain}>Payperhub</span>
-                  <span className={styles.logoSub}>E-Bike Store</span>
-                </div>
+              <Link href="/" className={styles.logo} aria-label="Payperhub - Premium E-Bike Store">
+                <Image
+                  src="/logo.png"
+                  alt="Payperhub"
+                  width={168}
+                  height={38}
+                  priority
+                  className={styles.logoImg}
+                />
               </Link>
 
               {/* Categories Dropdown */}
               <div className={styles.categoryDropdownWrapper} ref={dropdownRef}>
-              <button
-                className={styles.categoryBtn}
-                onClick={() => setIsCategoryOpen(!isCategoryOpen)}
-                aria-expanded={isCategoryOpen}
-              >
-                <Menu size={16} />
-                All Categories
-                <ChevronDown
-                  size={14}
-                  className={isCategoryOpen ? styles.chevronOpen : ''}
-                  style={{ transition: 'transform 200ms ease' }}
-                />
-              </button>
+                <button
+                  type="button"
+                  className={`${styles.categoryBtn} ${isCategoryOpen ? styles.categoryBtnActive : ''}`}
+                  onClick={() => setIsCategoryOpen(!isCategoryOpen)}
+                  aria-expanded={isCategoryOpen}
+                  aria-haspopup="true"
+                  aria-label="Browse categories"
+                >
+                  <span className={styles.categoryIconWrap}>
+                    <LayoutGrid size={15} />
+                  </span>
+                  <span className={styles.categoryBtnText}>Categories</span>
+                  <ChevronDown
+                    size={14}
+                    className={`${styles.categoryChevron} ${isCategoryOpen ? styles.chevronOpen : ''}`}
+                  />
+                </button>
 
-              {isCategoryOpen && (
-                <div className={styles.categoryDropdown}>
-                  <div className={styles.dropdownGrid}>
-                    {categories.map((cat) => (
+                {isCategoryOpen && (
+                  <div className={styles.categoryDropdown}>
+                    <div className={styles.dropdownHeader}>
+                      <div className={styles.dropdownHeaderLeft}>
+                        <span className={styles.dropdownHeaderBadge}>Catalog</span>
+                        <span className={styles.dropdownHeaderTitle}>Browse by Category</span>
+                      </div>
                       <Link
-                        key={cat.id}
-                        href={`/products?category=${cat.slug}`}
-                        className={styles.dropdownItem}
+                        href="/products"
+                        className={styles.dropdownViewAll}
                         onClick={() => setIsCategoryOpen(false)}
                       >
-                        <span className={styles.dropdownIcon}>
-                          <CategoryIcon slug={cat.slug} size={18} />
-                        </span>
-                        <div>
-                          <div className={styles.dropdownName}>{cat.name}</div>
-                          <div className={styles.dropdownCount}>
-                            {cat.productCount} products
-                          </div>
-                        </div>
+                        <span>All Products</span>
+                        <ArrowRight size={13} />
                       </Link>
-                    ))}
+                    </div>
+
+                    <div className={styles.dropdownGrid}>
+                      {categories.map((cat) => (
+                        <Link
+                          key={cat.id}
+                          href={`/products?category=${cat.slug}`}
+                          className={styles.dropdownCard}
+                          onClick={() => setIsCategoryOpen(false)}
+                        >
+                          <span className={styles.dropdownIconWrap}>
+                            <CategoryIcon slug={cat.slug} size={18} />
+                          </span>
+                          <div className={styles.dropdownCardContent}>
+                            <div className={styles.dropdownCardTop}>
+                              <span className={styles.dropdownName}>{cat.name}</span>
+                              <ChevronRight size={13} className={styles.dropdownArrow} />
+                            </div>
+                            <span className={styles.dropdownCount}>
+                              {cat.productCount} products
+                            </span>
+                          </div>
+                        </Link>
+                      ))}
+                    </div>
                   </div>
-                </div>
-              )}
-            </div>
+                )}
+              </div>
             </div> {/* End navLeft */}
 
             {/* Search Bar */}
-            <form className={styles.searchForm} onSubmit={handleSearch}>
+            <form className={styles.searchForm} onSubmit={handleSearch} role="search">
               <div className={styles.searchWrapper}>
-                <Search size={16} className={styles.searchIcon} />
                 <input
                   ref={searchRef}
                   type="search"
@@ -180,10 +207,14 @@ export default function Navbar() {
                     <X size={14} />
                   </button>
                 )}
+                <button
+                  type="submit"
+                  className={styles.searchSubmitBtn}
+                  aria-label="Submit search"
+                >
+                  <Search size={16} />
+                </button>
               </div>
-              <button type="submit" className={styles.searchSubmit} aria-label="Submit search">
-                Search
-              </button>
             </form>
 
             {/* Right Group */}
@@ -225,6 +256,20 @@ export default function Navbar() {
                 )}
               </button>
 
+              {/* Mobile Search Toggle */}
+              <button
+                type="button"
+                className={`${styles.actionBtn} ${styles.mobileSearchToggle}`}
+                onClick={() => {
+                  setIsMobileSearchOpen(!isMobileSearchOpen);
+                  setIsMobileMenuOpen(false);
+                }}
+                aria-label="Toggle search"
+                aria-expanded={isMobileSearchOpen}
+              >
+                <Search size={20} />
+              </button>
+
               {/* Account */}
               <Link href="/login" className={styles.actionBtn} aria-label="Account">
                 <User size={20} />
@@ -233,7 +278,10 @@ export default function Navbar() {
               {/* Mobile menu toggle */}
               <button
                 className={`${styles.actionBtn} ${styles.mobileMenuBtn}`}
-                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                onClick={() => {
+                  setIsMobileMenuOpen(!isMobileMenuOpen);
+                  setIsMobileSearchOpen(false);
+                }}
                 aria-label="Toggle menu"
                 aria-expanded={isMobileMenuOpen}
               >
@@ -244,22 +292,74 @@ export default function Navbar() {
           </nav>
         </div>
 
+        {/* Mobile Quick Search Bar */}
+        {isMobileSearchOpen && (
+          <div className={styles.mobileQuickSearch}>
+            <div className="container">
+              <form onSubmit={handleSearch} className={styles.searchWrapper} role="search">
+                <input
+                  type="search"
+                  autoFocus
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                  placeholder="Search motors, batteries, brakes..."
+                  className={styles.searchInput}
+                  aria-label="Search products"
+                />
+                {searchQuery && (
+                  <button
+                    type="button"
+                    onClick={() => setSearchQuery('')}
+                    className={styles.searchClear}
+                    aria-label="Clear search"
+                  >
+                    <X size={14} />
+                  </button>
+                )}
+                <button
+                  type="submit"
+                  className={styles.searchSubmitBtn}
+                  aria-label="Submit search"
+                >
+                  <Search size={16} />
+                </button>
+              </form>
+            </div>
+          </div>
+        )}
+
         {/* Mobile Menu */}
         {isMobileMenuOpen && (
           <div className={styles.mobileMenu}>
             <div className="container">
-              <form className={styles.mobileSearchForm} onSubmit={handleSearch}>
+              <form className={styles.mobileSearchForm} onSubmit={handleSearch} role="search">
                 <div className={styles.searchWrapper}>
-                  <Search size={16} className={styles.searchIcon} />
                   <input
                     type="search"
                     value={searchQuery}
                     onChange={(e) => setSearchQuery(e.target.value)}
                     placeholder="Search products..."
                     className={styles.searchInput}
+                    aria-label="Search products"
                   />
+                  {searchQuery && (
+                    <button
+                      type="button"
+                      onClick={() => setSearchQuery('')}
+                      className={styles.searchClear}
+                      aria-label="Clear search"
+                    >
+                      <X size={14} />
+                    </button>
+                  )}
+                  <button
+                    type="submit"
+                    className={styles.searchSubmitBtn}
+                    aria-label="Submit search"
+                  >
+                    <Search size={16} />
+                  </button>
                 </div>
-                <button type="submit" className={styles.searchSubmit}>Go</button>
               </form>
 
               <div className={styles.mobileCategoriesLabel}>Categories</div>
