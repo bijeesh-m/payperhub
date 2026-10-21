@@ -4,10 +4,18 @@ import ProductsClientPage from './ProductsClientPage';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Shop Electric Bike Parts',
-  description: 'Browse 300+ electric bike parts — motors, batteries, brakes, displays, tires & accessories. Filter by brand, price, rating & more.',
+  title: 'All EV & Electric Bike Parts Catalog',
+  description: 'Explore 300+ tested electric vehicle components — high-power mid-drive & hub motors, lithium battery packs, FOC controllers, hydraulic disc brakes, smart displays & EV accessories. Filter by brand, voltage, price & vehicle compatibility.',
   slug: 'products',
-  keywords: ['electric bike parts', 'e-bike motor', 'e-bike battery', 'buy ebike parts online'],
+  image: '/og-image.jpg',
+  keywords: [
+    'electric vehicle parts catalog',
+    'buy e-bike motors online',
+    'e-bike lithium battery India',
+    'hydraulic ebike brakes',
+    'FOC motor controller',
+    'EV conversion kit parts',
+  ],
 });
 
 export default function ProductsPage() {

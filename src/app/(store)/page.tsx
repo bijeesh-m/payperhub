@@ -14,8 +14,19 @@ import styles from './page.module.css';
 
 export const metadata: Metadata = buildMetadata({
   title: 'Premium Electric Vehicle & EV Parts',
-  description: `Shop ${SITE_NAME} for premier electric vehicle parts — high-performance motors, lithium battery packs, smart inverters, brakes & charging systems for all electric vehicles.`,
-  keywords: ['electric vehicle parts', 'EV parts', 'electric bike parts', 'e-bike motor', 'lithium battery pack', 'EV inverter', 'EV motor controller', 'regenerative braking'],
+  description: `Shop ${SITE_NAME} for premier electric vehicle parts — high-performance motors, modular lithium battery packs, smart FOC inverters, precision braking & charging systems for electric bikes, scooters, and custom EV builds. Express shipping across India.`,
+  image: '/og-image.jpg',
+  keywords: [
+    'electric vehicle parts',
+    'EV parts store',
+    'electric bike parts India',
+    'e-bike motor kit',
+    'lithium battery pack 48V 60V 72V',
+    'EV inverter controller',
+    'regenerative hydraulic disc brakes',
+    'custom EV conversions',
+    'electric scooter components',
+  ],
 });
 
 const featuredProducts = products.filter((p) => p.isFeatured).slice(0, 4);

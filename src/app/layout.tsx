@@ -5,21 +5,42 @@ import InitialLoader from '@/components/ui/InitialLoader';
 
 export const metadata: Metadata = {
   title: {
-    default: `${SITE_NAME} — Premium Electric Bike Parts`,
+    default: `${SITE_NAME} — Premium Electric Vehicle & EV Parts`,
     template: `%s | ${SITE_NAME}`,
   },
   description: SITE_DESCRIPTION,
-  keywords: 'electric bike parts, e-bike motors, e-bike batteries, ebike controller, hub motor, mid drive motor, e-bike accessories',
+  keywords: 'electric vehicle parts, EV parts, electric bike parts, e-bike motors, lithium battery packs, ebike controller, hub motor, mid drive motor, EV accessories, India',
   authors: [{ name: SITE_NAME }],
   creator: SITE_NAME,
+  publisher: SITE_NAME,
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL || 'https://payperhub.com'),
   openGraph: {
     type: 'website',
     siteName: SITE_NAME,
     locale: 'en_US',
+    title: `${SITE_NAME} — Premium Electric Vehicle & EV Parts`,
+    description: SITE_DESCRIPTION,
+    images: [
+      {
+        url: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: `${SITE_NAME} — Premium Electric Vehicle & EV Parts`,
+      },
+    ],
   },
-  twitter: { card: 'summary_large_image' },
-  robots: { index: true, follow: true },
+  twitter: {
+    card: 'summary_large_image',
+    title: `${SITE_NAME} — Premium Electric Vehicle & EV Parts`,
+    description: SITE_DESCRIPTION,
+    images: ['/og-image.jpg'],
+    creator: '@payperhub',
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+  },
 };
 
 export default function RootLayout({

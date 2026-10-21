@@ -4,9 +4,16 @@ import SearchClientPage from './SearchClientPage';
 import { buildMetadata } from '@/lib/seo';
 
 export const metadata: Metadata = buildMetadata({
-  title: 'Search Results — Electric Bike Parts',
-  description: 'Search for electric bike motors, batteries, controllers, throttles, and accessories.',
+  title: 'Search EV & Electric Bike Parts',
+  description: 'Search our full catalog of 300+ electric vehicle parts, brushless motors, lithium battery packs, smart FOC inverters, hydraulic brakes, and accessories.',
   slug: 'search',
+  image: '/og-image.jpg',
+  keywords: [
+    'search EV parts',
+    'search e-bike motors',
+    'find electric scooter parts',
+    'EV components search',
+  ],
 });
 
 export default function SearchPage() {

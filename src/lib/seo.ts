@@ -11,6 +11,7 @@ export function buildMetadata({
   image,
   type = 'website',
   keywords,
+  noIndex = false,
 }: {
   title: string;
   description: string;
@@ -18,9 +19,14 @@ export function buildMetadata({
   image?: string;
   type?: 'website' | 'article';
   keywords?: string[];
+  noIndex?: boolean;
 }): Metadata {
   const url = slug ? `${BASE_URL}/${slug}` : BASE_URL;
-  const ogImage = image || `${BASE_URL}/og-image.jpg`;
+  const ogImage = image
+    ? image.startsWith('http')
+      ? image
+      : `${BASE_URL}${image.startsWith('/') ? '' : '/'}${image}`
+    : `${BASE_URL}/og-image.jpg`;
 
   return {
     title: `${title} | ${SITE_NAME}`,
@@ -36,7 +42,14 @@ export function buildMetadata({
       description,
       url,
       siteName: SITE_NAME,
-      images: [{ url: ogImage, width: 1200, height: 630, alt: title }],
+      images: [
+        {
+          url: ogImage,
+          width: 1200,
+          height: 630,
+          alt: `${title} — ${SITE_NAME}`,
+        },
+      ],
       locale: 'en_US',
       type,
     },
@@ -47,11 +60,13 @@ export function buildMetadata({
       images: [ogImage],
       creator: '@payperhub',
     },
-    robots: {
-      index: true,
-      follow: true,
-      googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
-    },
+    robots: noIndex
+      ? { index: false, follow: false }
+      : {
+          index: true,
+          follow: true,
+          googleBot: { index: true, follow: true, 'max-image-preview': 'large' },
+        },
   };
 }
 

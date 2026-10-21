@@ -24,16 +24,29 @@ export async function generateMetadata({ params }: PageProps): Promise<Metadata>
     };
   }
 
+  const primaryImage =
+    product.images?.find((img) => img.isPrimary)?.url ||
+    product.images?.[0]?.url;
+  const productOgImage = primaryImage || '/og-image.jpg';
+  const cleanDescription =
+    product.description.length > 160
+      ? `${product.description.slice(0, 157)}...`
+      : product.description;
+
   return buildMetadata({
     title: `${product.name} — Buy Online`,
-    description: product.description.slice(0, 160),
+    description: cleanDescription,
     slug: `products/${product.slug}`,
+    image: productOgImage,
+    type: 'article',
     keywords: [
       product.name,
       product.brand,
+      product.category,
       product.subcategory,
-      'electric bike parts',
-      'e-bike accessories',
+      'buy EV parts',
+      'electric vehicle component',
+      'e-bike parts India',
     ],
   });
 }
