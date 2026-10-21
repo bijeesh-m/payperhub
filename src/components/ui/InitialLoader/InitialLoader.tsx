@@ -127,6 +127,7 @@ export default function InitialLoader({
             width={145}
             height={33}
             priority
+            unoptimized
             className={styles.brandLogoImg}
           />
           <div className={styles.progressBarTrack}>

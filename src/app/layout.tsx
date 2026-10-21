@@ -58,6 +58,7 @@ export default function RootLayout({
         <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
         <link rel="preload" href="/loading-poster.jpg" as="image" />
         <link rel="preload" href="/loading.mp4" as="video" type="video/mp4" />
+        <link rel="preload" href="/logo.png" as="image" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="icon" href="/icon.png" type="image/png" />
         <link rel="apple-touch-icon" href="/icon.png" />

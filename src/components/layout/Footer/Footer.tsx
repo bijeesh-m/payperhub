@@ -73,6 +73,7 @@ export default function Footer() {
                   alt="Payperhub"
                   width={160}
                   height={36}
+                  unoptimized
                   className={styles.footerLogoImg}
                 />
               </Link>

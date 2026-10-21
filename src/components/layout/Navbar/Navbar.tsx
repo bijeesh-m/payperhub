@@ -116,6 +116,7 @@ export default function Navbar() {
                   width={168}
                   height={38}
                   priority
+                  unoptimized
                   className={styles.logoImg}
                 />
               </Link>
